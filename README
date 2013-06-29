@@ -1,4 +1,3 @@
-These PowerDNS plugins for Munin were written by Jan Behrend and
-downloaded from http://muninexchange.projects.linpro.no
+These PowerDNS plugins for Munin were written by Jan Behrend and orginally downloaded from http://muninexchange.projects.linpro.no.
 
-I'm adding them to git for my own use in avar/linode-etc.
+Forked from avar/munin-pdns by me for some local changes.
