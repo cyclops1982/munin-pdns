@@ -9,7 +9,8 @@
 #%# family=auto
 #%# capabilities=autoconf
 
-command="/etc/init.d/pdns dump"
+PDNS_CONTROL="${pdns_control:-/usr/local/bin/pdns_control}"
+command="$PDNS_CONTROL show \*"
 
 if [ "$1" = "autoconf" ]; then
         echo yes

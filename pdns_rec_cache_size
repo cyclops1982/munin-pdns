@@ -9,6 +9,8 @@
 #    echo '[pdns_rec_*]' >/etc/munin/plugin-conf.d/pdns_rec
 #    echo 'user root' >>/etc/munin/plugin-conf.d/pdns_rec
 
+PDNS_REC_CONTROL="${rec_control:-/usr/local/bin/rec_control}"
+
 if [ "$1" = "autoconf" ]; then
 	if [ -e /usr/bin/rec_control ]; then
 		echo yes
@@ -39,7 +41,7 @@ if [ "$1" = "config" ]; then
 	exit 0
 fi
 
-echo entries.value `rec_control get cache-entries`
-echo negative.value `rec_control get negcache-entries`
+echo entries.value `$PDNS_REC_CONTROL get cache-entries`
+echo negative.value `$PDNS_REC_CONTROL get negcache-entries`
 
 exit 0
