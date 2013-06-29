@@ -9,14 +9,16 @@
 #    echo '[pdns_rec_*]' >/etc/munin/plugin-conf.d/pdns_rec
 #    echo 'user root' >>/etc/munin/plugin-conf.d/pdns_rec
 
+REC_CONTROL="${rec_control:-/usr/local/bin/rec_control}"
+
 if [ "$1" = "autoconf" ]; then
-	if [ -e /usr/bin/rec_control ]; then
-		echo yes
-		exit 0
-	else
-		echo no
-		exit 1
-	fi
+        if [ -e "$REC_CONTROL" ]; then
+                echo yes
+                exit 0
+        else
+                echo no
+                exit 1
+        fi
 fi
 
 if [ "$1" = "config" ]; then
@@ -34,6 +36,6 @@ if [ "$1" = "config" ]; then
 	exit 0
 fi
 
-echo throttled.value `rec_control get throttled-out`
+echo throttled.value `$REC_CONTROL get throttled-out`
 
 exit 0

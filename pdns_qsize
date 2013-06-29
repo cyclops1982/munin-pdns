@@ -12,10 +12,14 @@
 PDNS_CONTROL="${pdns_control:-/usr/local/bin/pdns_control}"
 
 if [ "$1" = "autoconf" ]; then
-        echo yes
-        exit 0
+        if [ -e "$PDNS_CONTROL" ]; then
+                echo yes
+                exit 0
+        else
+                echo no
+                exit 1
+        fi
 fi
-
 if [ "$1" = "config" ]; then
         echo 'graph_title PDNS Auth. database queue'
         echo 'graph_args -l 0'

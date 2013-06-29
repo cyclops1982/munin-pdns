@@ -10,11 +10,15 @@
 #%# capabilities=autoconf
 
 PDNS_CONTROL="${pdns_control:-/usr/local/bin/pdns_control}"
-command="$PDNS_CONTROL show \*"
 
 if [ "$1" = "autoconf" ]; then
-        echo yes
-        exit 0
+        if [ -e "$PDNS_CONTROL" ]; then
+                echo yes
+                exit 0
+        else
+                echo no
+                exit 1
+        fi
 fi
 
 if [ "$1" = "config" ]; then
@@ -50,5 +54,9 @@ if [ "$1" = "config" ]; then
         exit 0
 fi
 
-
-$command | sed 's/=\([0-9]\+\),/.value \1\n/g' | grep udp-'\|'recursing'\|'tcp | sed 's/-/_/g'
+echo recursing_answers.value `$PDNS_CONTROL show recursing-answers`
+echo recursing_questions.value `$PDNS_CONTROL show recursing-questions`
+echo tcp_answers.value `$PDNS_CONTROL show tcp-answers`
+echo tcp_queries.value `$PDNS_CONTROL show tcp-queries`
+echo udp_answers.value `$PDNS_CONTROL show udp-answers`
+echo udp_queries.value `$PDNS_CONTROL show udp-queries`

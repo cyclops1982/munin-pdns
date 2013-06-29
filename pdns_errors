@@ -10,8 +10,6 @@
 #%# capabilities=autoconf
 
 PDNS_CONTROL="${pdns_control:-/usr/local/bin/pdns_control}"
-command="$PDNS_CONTROL show \*"
-
 
 if [ "$1" = "autoconf" ]; then
         if [ -e "$PDNS_CONTROL" ]; then
@@ -45,5 +43,6 @@ if [ "$1" = "config" ]; then
         exit 0
 fi
 
-
-$command | sed 's/=\([0-9]\+\),/.value \1\n/g' | grep corrupt'\|'servfail'\|'timedout | sed 's/-/_/g'
+echo corrupt_packets.value `$PDNS_CONTROL show corrupt-packets`
+echo servfail_packets.value `$PDNS_CONTROL show servfail-packets`
+echo timedout_packets.value `$PDNS_CONTROL show timedout-packets`
