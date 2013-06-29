@@ -20,7 +20,7 @@ if [ "$1" = "autoconf" ]; then
 fi
 
 if [ "$1" = "config" ]; then
-	echo 'graph_title PDNS Outbound Queries'
+	echo 'graph_title PDNS Recursor Outbound Queries'
 	echo 'graph_order all tcp'
 	echo 'graph_vlabel queries'
 	echo 'graph_info Outbound queries'

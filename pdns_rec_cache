@@ -24,7 +24,7 @@ ISRESENDS=""
 [ "$RESENDS" != "UNKNOWN" ] && ISRESENDS="resends"
 
 if [ "$1" = "config" ]; then
-	echo 'graph_title PDNS Cache'
+	echo 'graph_title PDNS Recursor Cache'
 	echo "graph_order hits misses $ISRESENDS"
 	echo 'graph_vlabel entries'
 	echo 'graph_info Hit/miss rate'
