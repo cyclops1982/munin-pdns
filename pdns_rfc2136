@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# Script to monitor PowerDNS performance
+#
+# Parameters understood:
+#
+#       config   (required)
+#       autoconf (optional - used by munin-config)
+#%# family=auto
+#%# capabilities=autoconf
+
+PDNS_CONTROL="${pdns_control:-/usr/local/bin/pdns_control}"
+
+if [ "$1" = "autoconf" ]; then
+        if [ -e "$PDNS_CONTROL" ]; then
+                echo yes
+                exit 0
+        else
+                echo no
+                exit 1
+        fi
+fi
+
+if [ "$1" = "config" ]; then
+        echo 'graph_title PDNS Auth. RFC2136 Queries'
+        echo 'graph_args -l 0 --base 1000'
+        echo 'graph_vlabel numbers of'
+        echo 'graph_category PDNS Authoritative'
+        echo 'graph_info This graph shows the RFC2136 queries on the machine.'
+
+	echo 'rfc2136-answers.label RFC2136 Answers'
+	echo 'rfc2136-answers.type DERIVE'
+	echo 'rfc2136-answers.min 0'
+	echo 'rfc2136-answers.info The number of RFC2136 answers given'
+
+	echo 'rfc2136-changes.label Records changed by RFC2136'
+	echo 'rfc2136-changes.type DERIVE'
+	echo 'rfc2136-changes.min 0'
+	echo 'rfc2136-changes.info The number of records changed by RFC2136'
+
+	echo 'rfc2136-queries.label RFC2136 Queries'
+	echo 'rfc2136-queries.type DERIVE '
+	echo 'rfc2136-queries.min 0 '
+	echo 'rfc2136-queries.info The number of RFC2136 queries in total'
+
+	echo 'rfc2136-refused.label RFC2136 messages refused'
+	echo 'rfc2136-refused.type DERIVE '
+	echo 'rfc2136-refused.min 0 '
+	echo 'rfc2136-refused.info The number of RFC2136 messages received that are refused'
+
+        exit 0
+fi
+
+echo rfc2136-answers `$PDNS_CONTROL show rfc2136-answers`
+echo rfc2136-changes `$PDNS_CONTROL show rfc2136-changes`
+echo rfc2136-queries `$PDNS_CONTROL show rfc2136-queries`
+echo rfc2136-refused `$PDNS_CONTROL show rfc2136-refused`
