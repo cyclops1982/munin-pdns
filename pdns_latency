@@ -36,4 +36,4 @@ fi
 
 
 
-echo "latency.value $($PDNS_CONTROL show latency | awk -F= '{print $2}')"
+echo "latency.value $($PDNS_CONTROL show latency)"
