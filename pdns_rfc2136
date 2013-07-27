@@ -51,7 +51,7 @@ if [ "$1" = "config" ]; then
         exit 0
 fi
 
-echo rfc2136-answers `$PDNS_CONTROL show rfc2136-answers`
-echo rfc2136-changes `$PDNS_CONTROL show rfc2136-changes`
-echo rfc2136-queries `$PDNS_CONTROL show rfc2136-queries`
-echo rfc2136-refused `$PDNS_CONTROL show rfc2136-refused`
+echo rfc2136-answers.value `$PDNS_CONTROL show rfc2136-answers`
+echo rfc2136-changes.value `$PDNS_CONTROL show rfc2136-changes`
+echo rfc2136-queries.value `$PDNS_CONTROL show rfc2136-queries`
+echo rfc2136-refused.value `$PDNS_CONTROL show rfc2136-refused`
